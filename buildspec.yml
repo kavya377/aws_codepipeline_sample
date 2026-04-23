@@ -1,0 +1,26 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      dotnet: 8.0
+
+  pre_build:
+    commands:
+      - echo Restoring dependencies...
+      - dotnet restore
+
+  build:
+    commands:
+      - echo Building project...
+      - dotnet build --configuration Release
+
+  post_build:
+    commands:
+      - echo Publishing project...
+      - dotnet publish -c Release -o publish
+
+artifacts:
+  files:
+    - '**/*'
+  base-directory: publish
